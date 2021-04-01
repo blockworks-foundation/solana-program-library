@@ -53,11 +53,7 @@ pub fn calculate_fee(
         let fee = token_amount
             .checked_mul(fee_numerator)?
             .checked_div(fee_denominator)?;
-        if fee == 0 {
-            Some(1) // minimum fee of one token
-        } else {
-            Some(fee)
-        }
+        Some(fee)
     }
 }
 

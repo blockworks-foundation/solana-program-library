@@ -53,12 +53,12 @@ impl<'a> SwapConstraints<'a> {
 }
 
 #[cfg(feature = "production")]
-const OWNER_KEY: &'static str = env!("SWAP_PROGRAM_OWNER_FEE_ADDRESS");
+const OWNER_KEY: &'static str = "FinVobfi4tbdMdfN9jhzUuDVqGXfcFnRGX57xHcTWLfW";
 #[cfg(feature = "production")]
 const FEES: &Fees = &Fees {
     trade_fee_numerator: 25,
     trade_fee_denominator: 10000,
-    owner_trade_fee_numerator: 5,
+    owner_trade_fee_numerator: 25,
     owner_trade_fee_denominator: 10000,
     owner_withdraw_fee_numerator: 0,
     owner_withdraw_fee_denominator: 0,
@@ -66,7 +66,7 @@ const FEES: &Fees = &Fees {
     host_fee_denominator: 100,
 };
 #[cfg(feature = "production")]
-const VALID_CURVE_TYPES: &[CurveType] = &[CurveType::ConstantPrice, CurveType::ConstantProduct];
+const VALID_CURVE_TYPES: &[CurveType] = &[CurveType::ConstantPrice, CurveType::ConstantProduct, CurveType::Offset];
 
 /// Fee structure defined by program creator in order to enforce certain
 /// fees when others use the program.  Adds checks on pool creation and
