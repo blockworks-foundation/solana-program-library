@@ -12,6 +12,7 @@ pub mod tools;
 
 // Export current sdk types for downstream users building with a different sdk version
 pub use solana_program;
+pub mod meta;
 
 /// Seed prefix for Governance  PDAs
 /// Note: This prefix is used for the initial set of PDAs and shouldn't be used for any new accounts
