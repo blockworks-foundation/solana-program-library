@@ -13,7 +13,7 @@ security_txt! {
 
     // Optional Fields
     source_code: "https://github.com/blockworks-foundation/solana-program-library",
-    source_revision: env!("GITHUB_SHA"),
-    source_release: env!("GITHUB_REF_NAME"),
+    source_revision: "d9d4214341041ac2bf6880f5d3342e1dccda380a",
+    source_release: "governance-v3.1.0",
     auditors: "Neodyme,OtterSec"
 }
