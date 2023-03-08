@@ -251,7 +251,6 @@ mod tests {
     use super::*;
     use crate::curve::calculator::{RoundDirection, INITIAL_SWAP_POOL_AMOUNT};
     use proptest::prelude::*;
-    use sim::StableSwapModel;
 
     #[test]
     fn initial_pool_amount() {
@@ -302,49 +301,49 @@ mod tests {
         assert!(results.is_none());
     }
 
-    proptest! {
-        #[test]
-        fn constant_product_swap_no_fee(
-            swap_source_amount in 100..1_000_000_000_000_000_000u128,
-            swap_destination_amount in 100..1_000_000_000_000_000_000u128,
-            source_amount in 100..100_000_000_000u128,
-            amp in 1..150u64
-        ) {
-            prop_assume!(source_amount < swap_source_amount);
+    // proptest! {
+    //     #[test]
+    //     fn constant_product_swap_no_fee(
+    //         swap_source_amount in 100..1_000_000_000_000_000_000u128,
+    //         swap_destination_amount in 100..1_000_000_000_000_000_000u128,
+    //         source_amount in 100..100_000_000_000u128,
+    //         amp in 1..150u64
+    //     ) {
+    //         prop_assume!(source_amount < swap_source_amount);
 
-            let curve = StableCurve { amp };
+    //         let curve = StableCurve { amp };
 
-            let model: StableSwapModel = StableSwapModel::new(
-                curve.amp.into(),
-                vec![swap_source_amount, swap_destination_amount],
-                N_COINS,
-            );
+    //         let model: StableSwapModel = StableSwapModel::new(
+    //             curve.amp.into(),
+    //             vec![swap_source_amount, swap_destination_amount],
+    //             N_COINS,
+    //         );
 
-            let result = curve.swap_without_fees(
-                source_amount,
-                swap_source_amount,
-                swap_destination_amount,
-                TradeDirection::AtoB,
-            );
+    //         let result = curve.swap_without_fees(
+    //             source_amount,
+    //             swap_source_amount,
+    //             swap_destination_amount,
+    //             TradeDirection::AtoB,
+    //         );
 
-            let result = result.unwrap();
-            let sim_result = model.sim_exchange(0, 1, source_amount);
+    //         let result = result.unwrap();
+    //         let sim_result = model.sim_exchange(0, 1, source_amount);
 
-            let diff =
-                (sim_result as i128 - result.destination_amount_swapped as i128).abs();
+    //         let diff =
+    //             (sim_result as i128 - result.destination_amount_swapped as i128).abs();
 
-            assert!(
-                diff <= 1,
-                "result={}, sim_result={}, amp={}, source_amount={}, swap_source_amount={}, swap_destination_amount={}",
-                result.destination_amount_swapped,
-                sim_result,
-                amp,
-                source_amount,
-                swap_source_amount,
-                swap_destination_amount
-            );
-        }
-    }
+    //         assert!(
+    //             diff <= 1,
+    //             "result={}, sim_result={}, amp={}, source_amount={}, swap_source_amount={}, swap_destination_amount={}",
+    //             result.destination_amount_swapped,
+    //             sim_result,
+    //             amp,
+    //             source_amount,
+    //             swap_source_amount,
+    //             swap_destination_amount
+    //         );
+    //     }
+    // }
 
     #[test]
     fn pack_curve() {

@@ -19,6 +19,7 @@ pub fn process_instruction(
 
     // Log 5 numbers as u64s in hexadecimal format
     msg!(
+        "{:x}:{:x}:{:x}:{:x}:{:x}",
         instruction_data[0],
         instruction_data[1],
         instruction_data[2],

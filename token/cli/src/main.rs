@@ -1823,10 +1823,7 @@ fn main() {
             .value_of(&default_signer_arg_name)
             .map(|s| s.to_string())
             .unwrap_or_else(|| cli_config.keypair_path.clone());
-        let default_signer = DefaultSigner {
-            path: default_signer_path,
-            arg_name: default_signer_arg_name,
-        };
+        let default_signer = DefaultSigner::new(default_signer_arg_name, default_signer_path);
 
         // Owner doesn't sign when using a mulitisig...
         let owner = if matches.is_present(MULTISIG_SIGNER_ARG.name)

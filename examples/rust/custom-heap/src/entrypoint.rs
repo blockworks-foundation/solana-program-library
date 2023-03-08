@@ -18,8 +18,8 @@ unsafe impl std::alloc::GlobalAlloc for BumpAllocator {
     #[inline]
     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
         const POS_PTR: *mut usize = HEAP_START_ADDRESS as *mut usize;
-        const TOP_ADDRESS: usize = HEAP_START_ADDRESS + HEAP_LENGTH;
-        const BOTTOM_ADDRESS: usize = HEAP_START_ADDRESS + size_of::<*mut u8>();
+        const TOP_ADDRESS: usize = HEAP_START_ADDRESS as usize + HEAP_LENGTH;
+        const BOTTOM_ADDRESS: usize = HEAP_START_ADDRESS as usize + size_of::<*mut u8>();
 
         let mut pos = *POS_PTR;
         if pos == 0 {

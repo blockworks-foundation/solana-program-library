@@ -110,6 +110,7 @@ fn get_authority_accounts(config: &Config, authority: &Pubkey) -> Vec<(Pubkey, A
                     encoding: Some(UiAccountEncoding::Base64),
                     ..RpcAccountInfoConfig::default()
                 },
+                with_context: None,
             },
         )
         .unwrap()
