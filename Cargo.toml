@@ -12,7 +12,7 @@ members = [
   "libraries/math",
   "memo/program",
   "record/program",
-  "shared-memory/program",
+  # "shared-memory/program",
   "stake-pool/cli",
   "stake-pool/program",
   "token-lending/program",
